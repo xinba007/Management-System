@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理系统</title>
+    <link rel="shortcut icon" href="img/bitbug_favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="lib/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <%-include('../components/nav')%>
+        <div class="main">
+            <div class="main-list fl">
+                <h3 class="list-head"><i class="glyphicon glyphicon-list"></i> 菜单列表</h3>
+
+                <div class="list-group text-center">
+                    <%- include("../components/header.ejs")%>
+                </div>
+            </div>
+            <div class="main-content fl ">
+                <ol class="breadcrumb">
+                    <li><a href="javascript:;">菜单列表</a></li>
+                    <li><a href="javascript:;">产品信息</a></li>
+                    <li class="active">添加新产品</li>
+                </ol>
+                <div class="content-a2 show">
+                    <form method="post" enctype="multipart/form-data" action="/api/doAddProduct">
+                        <table>
+                            <tr>
+                                <td>产品名称:</td>
+                                <td>
+                                    <input type="text" maxlength="15" required name="pro_name">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>产品价格:</td>
+                                <td>
+                                    <input type="text" pattern="^\d+$" required name="pro_price">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>产品分类:</td>
+                                <td>
+                                    <select name="pro_sort">
+                                        <option value="英雄周边">英雄周边</option>
+                                        <option value="危险品">危险品</option>
+                                        <option value="烟草类">烟草类</option>
+                                        <option value="极度危险品">极度危险品</option>
+                                        <option value="科幻类">科幻类</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>选择图片:</td>
+                                <td>
+                                    <input type="file" required name="pro_pic">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td><button class="btn btn-default ">确认添加</button></td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+            <script src="lib/jQuery-1.12.4/jQuery-1.12.4-min.js "></script>
+            <script src="lib/bootstrap-3.4.1/js/bootstrap.js "></script>
+            <script src="js/index.js "></script>
+</body>
+
+</html>

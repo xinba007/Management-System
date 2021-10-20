@@ -1,0 +1,43 @@
+<div class="updatePro">
+    <div>
+        <i class="glyphicon glyphicon-remove"></i>
+        <form method="post" enctype="multipart/form-data" action="/api/updatePro">
+            <table>
+                <tr>
+                    <td>产品名称:</td>
+                    <td>
+                        <input type="text" maxlength="15" required name="pro_name" readonly>
+                    </td>
+                </tr>
+                <tr>
+                    <td>产品价格:</td>
+                    <td>
+                        <input type="text" pattern="^[0-9]+$" required name="pro_price">
+                    </td>
+                </tr>
+                <tr>
+                    <td>产品分类:</td>
+                    <td>
+                        <select name="pro_sort">
+                            <option value="英雄周边">英雄周边</option>
+                            <option value="危险品">危险品</option>
+                            <option value="烟草类">烟草类</option>
+                            <option value="极度危险品">极度危险品</option>
+                            <option value="科幻类">科幻类</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>产品图片:</td>
+                    <td>
+                        <input type="file" required name="pro_pic">
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><button class="btn btn-default">确认修改</button></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>

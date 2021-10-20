@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理系统</title>
+    <link rel="shortcut icon" href="img/bitbug_favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="lib/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="stylesheet" href="css/index.css">
+    <style>
+        th {
+            text-align: center !important;
+        }
+        
+        td {
+            line-height: 32px !important;
+        }
+        
+        .ml200 {
+            margin-left: 200px;
+        }
+        
+        .tbody {
+            height: 445px;
+        }
+    </style>
+</head>
+
+<body>
+    <%-include("../components/nav")%>
+        <div class="main">
+            <div class="main-list fl">
+                <h3 class="list-head"><i class="glyphicon glyphicon-list"></i> 菜单列表</h3>
+                <div class="list-group text-center">
+                    <%- include("../components/header.ejs")%>
+                </div>
+            </div>
+            <div class="main-content fl">
+                <ol class="breadcrumb">
+                    <li><a href="javascript:;">菜单列表</a></li>
+                    <li><a href="javascript:;">产品信息</a></li>
+                    <li class="active">查看产品列表</li>
+                </ol>
+                <div class="tbody">
+                    <table class="table table-bordered text-center">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>产品图片</th>
+                                <th>产品名称</th>
+                                <th>产品价格</th>
+                                <th>产品分类</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <%for(var i=0;i<data.length;i++){%>
+                                <tr>
+                                    <td>
+                                        <%=i+1%>
+                                    </td>
+                                    <td>
+                                        <img src="<%=data[i].p_pic?data[i].p_pic:'img/小黑狗.png'%>" width="50" height="50" alt="">
+                                    </td>
+                                    <td>
+                                        <%=data[i].p_name%>
+                                    </td>
+                                    <td>
+                                        <%=data[i].p_price%>
+                                    </td>
+                                    <td>
+                                        <%=data[i].p_sort%>
+                                    </td>
+                                    <td>
+                                        <a href="javascript:;" class="btn btn-info" data-id="bj">编辑</a>
+                                        <a href="javascript:;" class="btn btn-danger" data-href="/api/removePro?p_name=<%=data[i].p_name%>" data-id="sc">删除</a>
+                                    </td>
+                                </tr>
+                                <%}%>
+                        </tbody>
+                    </table>
+                </div>
+                <ul class="pagination center-block ml200">
+                    <li><a href="/api/product?page=<%=page==1?page:page-1%>">&laquo;</a></li>
+                    <%for(var i=0;i<length;i++){%>
+                        <li class=" <%=page==(i+1)?'active':''%>">
+                            <a href="/api/product?page=<%=i+1%>">
+                                <%=i+1%>
+                            </a>
+                        </li>
+                        <%}%>
+                            <li>
+                                <a href="/api/product?page=<%=page==length?length:page+1%>">&raquo;</a>
+                            </li>
+                </ul>
+            </div>
+            <%-include('../components/updatePro')%>
+        </div>
+        <script src="lib/jQuery-1.12.4/jQuery-1.12.4-min.js "></script>
+        <script src="lib/bootstrap-3.4.1/js/bootstrap.js "></script>
+        <script src="js/index.js "></script>
+</body>
+
+</html>

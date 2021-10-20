@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理系统</title>
+    <link rel="shortcut icon" href="img/bitbug_favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="lib/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <%- include("../components/nav.ejs")%>
+
+
+        <div class="main">
+            <div class="main-list fl">
+                <h3 class="list-head"><i class="glyphicon glyphicon-list"></i> 菜单列表</h3>
+
+                <div class="list-group text-center">
+                    <%- include("../components/header.ejs")%>
+                </div>
+            </div>
+            <div class="main-content fl ">
+                <div class="content-a1 show ">
+                    <ol class="breadcrumb">
+                        <li><a href="javascript:;">菜单列表</a></li>
+                        <li><a href="javascript:;">用户信息</a></li>
+                        <li class="active">查看用户列表</li>
+                    </ol>
+                    <div class="search">
+                        <span>通过用户名查找：</span>
+                        <input type="text">
+                        <button id="c-search">查找</button>
+                        <e></e>
+                    </div>
+                    <div class="a1-table">
+                        <table border="1" class="table-hover">
+                            <thead>
+                                <tr>
+                                    <th>序号</th>
+                                    <th>头像</th>
+                                    <th>用户名</th>
+                                    <th>密码</th>
+                                    <th>手机号</th>
+                                    <th>权限</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%for(var i=0;i<data.length;i++){%>
+                                    <% if(user_name == data[i].user_name){%>
+                                        <tr class="a1-table-active">
+                                            <%}else{%>
+                                                <tr>
+                                                    <%}%>
+                                                        <td>
+                                                            <%= i+1 %>
+                                                        </td>
+                                                        <td>
+                                                            <img src="<%=data[i].user_pic?data[i].user_pic:'img/cat.png'%>" width="60" height="60" alt="">
+                                                        </td>
+                                                        <td class="user_name">
+                                                            <%= data[i].user_name%>
+                                                        </td>
+                                                        <%if(power =="超级管理员"||power =="迷你超级管理员"||(power =="管理员"&&data[i].power !='管理员'&&data[i].power !='超级管理员'&&data[i].power !='迷你超级管理员')){%>
+                                                            <td class="user_psw">
+                                                                <%= data[i].user_psw%>
+                                                            </td>
+                                                            <%}else if(user_name == data[i].user_name){%>
+                                                                <td class="user_psw">
+                                                                    <%= data[i].user_psw%>
+                                                                </td>
+                                                                <%}else{%>
+                                                                    <td class="user_psw">
+                                                                        **********
+                                                                    </td>
+                                                                    <%}%>
+                                                                        <td class="user_tel">
+                                                                            <%= data[i].user_tel%>
+                                                                        </td>
+                                                                        <td class="power">
+                                                                            <%= data[i].power%>
+                                                                        </td>
+                                                                        <td class="update">
+                                                                            <a href="javascript:; " class="xg">修改</a>&emsp;
+                                                                            <a href="javascript:; " class="sc">删除</a>
+                                                                        </td>
+                                                </tr>
+                                                <%}%>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center">
+                        <ul class="pagination fenyeList">
+                            <li class="fenye-left ">
+                                <a href="/api/searchIndex?page=<%=page==0?0:page-1%>&uname=<%=uname%>">
+                                    <span>&laquo;</span>
+                                </a>
+                            </li>
+                            <%for(var i=0;i<data2;i++){%>
+                                <li class="fenye <%=page==i?'active':''%>">
+                                    <a href="/api/searchIndex?page=<%=i%>&uname=<%=uname%>">
+                                        <%=i+1%>
+                                    </a>
+                                </li>
+                                <%}%>
+                                    <li class="fenye-right ">
+                                        <a href="/api/searchIndex?page=<%=page==data2-1?data2-1:page+1%>&uname=<%=uname%>">
+                                            <span>&raquo;</span>
+                                        </a>
+                                    </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <%-include("../components/update.ejs")%>
+        </div>
+        <script src="lib/jQuery-1.12.4/jQuery-1.12.4-min.js "></script>
+        <script src="lib/bootstrap-3.4.1/js/bootstrap.js "></script>
+        <script src="js/index.js "></script>
+</body>
+
+</html>

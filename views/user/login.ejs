@@ -1,0 +1,100 @@
+<!DOCTYPE html5>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>请登录</title>
+    <link rel="stylesheet" href="lib/bootstrap-3.4.1/css/bootstrap.css">
+    <link rel="shortcut icon" href="img/bitbug_favicon.ico" type="image/x-icon">
+    <style>
+        .bj {
+            position: fixed;
+            top: 0px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url(img/12.png);
+            background-size: cover;
+            z-index: -1;
+        }
+        
+        .main {
+            width: 600px;
+            height: 330px;
+            margin: 100px auto;
+            padding-top: 40px;
+            border: 1px solid #000;
+            border-radius: 15px;
+            color: #000;
+        }
+        
+        h2 {
+            font-weight: 600;
+            color: black;
+            margin-bottom: 20px;
+        }
+        
+        .form-horizontal .control-label {
+            padding-top: 7px;
+            margin-bottom: 0;
+            text-align: right;
+        }
+        
+        .error {
+            clear: both;
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bj"></div>
+    <div class="main row">
+        <h2 class="text-center">请登录</h2>
+        <form class="form-horizontal" method="post" action="/api/doLogin">
+            <div class="form-group">
+                <label for="inputText3" class="col-xs-4 control-label">用户名:</label>
+                <div class="col-xs-5">
+                    <input type="text" class="form-control" pattern='^[a-zA-Z0-9_]{5,16}$' id="inputText3" name="user_name" placeholder="请输入用户名" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputPassword3" class=" col-xs-4 control-label ">密&emsp;码:</label>
+                <div class="col-xs-5">
+                    <input type="password" class="form-control " pattern="^[a-zA-Z0-9_]{5,16}$" id="inputPassword3" name="user_psw" placeholder="请输入密码" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-4 col-xs-5">
+                    <div class="checkbox">
+                        <label>
+                    <input type="checkbox" required name="place" value="/login"> 我已阅读并同意<a href="javascript:;">此协议</a>
+                  </label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-4 col-xs-4 text-center">
+                    <button id="submit" type="submit" class="btn btn-info">登&emsp;录</button>&nbsp;
+                    <a href="/api/sign" class="btn btn-info">去注册</a>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="lib/jQuery-1.12.4/jQuery-1.12.4-min.js"></script>
+    <script src="lib/bootstrap-3.4.1/js/bootstrap.js"></script>
+    <script>
+        let userName = new RegExp(/^\w{5,16}$/);
+        $('#inputText3,#inputPassword3').blur(function() {
+            if (!userName.test($(this).val().trim())) {
+                $(this).parents('.form-group').addClass('has-error');
+            } else {
+                $(this).parents('.form-group').removeClass('has-error').addClass('has-success');
+            }
+        });
+    </script>
+</body>
+
+</html>
